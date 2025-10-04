@@ -504,7 +504,7 @@ pre {
                 tially outperform prior vision-based sim-and-real co-training approaches. POINT
                 BRIDGE yields improvements of up to 44% on zero-shot sim-to-real transfer and up
                 to 66% when co-trained with a small amount of real data. POINT BRIDGE also fa-
-                cilitates multi-task learning. Videos of the robot are best viewed at: https://pointbridge-anon.github.io/
+                cilitates multi-task learning.
             </p>
         </div>
     </section>
@@ -534,28 +534,35 @@ pre {
     </section>
 
     <section>
-        <hr>
+        <!-- <hr>
         <h2>Proposed Framework</h2>
         <p>
         </p>
         <br><br>
         <center>
             <div class="mx-auto">
-                <img class="card-img-top" src="./mfiles/images/method.png" style="width:900">
+                <img class="card-img-top" src="./mfiles/images/intro.pdf" style="width:900">
             </div>
         </center>
-        <br><br>
+        <br><br> -->
 
         <hr>
-        <h2>In-domain Performance</h2>
+        <h2>Zero-shot Sim-to-Real Transfer</h2>
         <br><br>
         
         Task: <select id="taskSelect1">
-            <option value="fold towel">fold towel</option>
-        </select>    Trajectory: <select id="trajectorySelect1">
-            <option value="trajectory 1">trajectory 1</option>
-            <option value="trajectory 2">trajectory 2</option>
-            <option value="trajectory 3">trajectory 3</option>
+            <option value="stack_bowls">stack bowls</option>
+            <option value="bowl_on_plate">put bowl on plate</option>
+            <option value="mug_on_plate">put mug on plate</option>
+        </select>    
+        Object: <select id="objectSelect1">
+            <option value="option1">option 1</option>
+            <option value="option2">option 2</option>
+            <option value="option3">option 3</option>
+        </select>    
+        Trajectory: <select id="trajectorySelect1">
+            <option value="traj1">trajectory 1</option>
+            <option value="traj2">trajectory 2</option>
         </select>
     
         <div class="video-container">
@@ -567,19 +574,22 @@ pre {
     
         <script>
             const taskSelect1 = document.getElementById('taskSelect1');
+            const objectSelect1 = document.getElementById('objectSelect1');
             const trajectorySelect1 = document.getElementById('trajectorySelect1');
             const videoSource1 = document.getElementById('videoSource');
             const videoPlayer1 = document.getElementById('videoPlayer');
     
             function updateVideo1() {
                 const task = taskSelect1.value;
+                const object = objectSelect1.value;
                 const trajectory = trajectorySelect1.value;
-                const videoUrl = `./mfiles/videos_in_domain/${task}_${trajectory}.mp4`;
+                const videoUrl = `./mfiles/videos/${task}_${object}_${trajectory}.mp4`;
                 videoSource1.src = videoUrl;
                 videoPlayer1.load();
             }
     
             taskSelect1.addEventListener('change', updateVideo1);
+            objectSelect1.addEventListener('change', updateVideo1);
             trajectorySelect1.addEventListener('change', updateVideo1);
     
             // Initial video load
