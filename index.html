@@ -495,15 +495,15 @@ pre {
                 BRIDGE, a framework that uses unified domain-agnostic point-based representa-
                 tions to unlock the potential of synthetic simulation datasets and enable zero-shot
                 sim-to-real policy transfer without explicit visual or object-level alignment across
-                domains. POINT BRIDGE combines automated point-based representation extrac-
+                domains. Point Bridge combines automated point-based representation extrac-
                 tion via Vision-Language Models (VLMs), transformer-based policy learning, and
                 inference-time pipelines that balance accuracy and computational efficiency to
                 establish a system that can train capable real-world manipulation agents with purely
-                synthetic data. POINT BRIDGE can further benefit from co-training on small sets of
+                synthetic data. Point Bridge can further benefit from co-training on small sets of
                 real-world demonstrations, training high-quality manipulation agents that substan-
                 tially outperform prior vision-based sim-and-real co-training approaches. POINT
                 BRIDGE yields improvements of up to 44% on zero-shot sim-to-real transfer and up
-                to 66% when co-trained with a small amount of real data. POINT BRIDGE also fa-
+                to 66% when co-trained with a small amount of real data. Point Bridge also fa-
                 cilitates multi-task learning.
             </p>
         </div>
@@ -548,6 +548,12 @@ pre {
 
         <hr>
         <h2>Zero-shot Sim-to-Real Transfer</h2>
+        <br><br>
+
+        We evaluate Point Bridge for zero-shot sim-to-real transfer on 3 simulated tasks. We observe 
+        that Point Bridge’s scene-filtering strategy produces domain-invariant representations, 
+        outperforming the strongest baseline by 39% in single-task transfer and 44% in multitask transfer.
+        We provide videos of successful rollouts below (all played at 2X speed).
         <br><br>
         
         Task: <select id="taskSelect1">
@@ -598,33 +604,56 @@ pre {
 
         <br><br>
 
-        <!-- <hr>
-        <h2>Performance on Novel Object Instances</h2>
+        <hr>
+        <h2>Point Bridge on Soft and Artificial Objects</h2>
         <br><br>
 
-        <label for="video-select2">Task:</label>
-        <select id="video-select2" onchange="displayVideo2()">
-            <option value="./mfiles/videos_new_objects/put_bowl_in_oven_newobject1.mp4">put bowl in oven (object 1)</option>
+        We evaluate single-task Point Bridge policies on three tasks involving soft objects (towel) and articulated objects (drawer, oven).
+        Overall, Point Bridge achieves an 85% success rate across these tasks, highlighting its effectiveness beyond rigid-object manipulation.
+        We provide videos of successful rollouts below (all played at 2X speed).
+        <br><br>
+        
+        Task: <select id="taskSelect2">
+            <option value="fold_towel">fold_towel</option>
+            <option value="close_drawer">close drawer</option>
+            <option value="bowl_in_oven">put bowl in oven</option>
+        </select>    
+        Trajectory: <select id="trajectorySelect2">
+            <option value="traj1">trajectory 1</option>
+            <option value="traj2">trajectory 2</option>
         </select>
-
-        <div id="video-container2">
-            <video id="selected-video2" controls>
+    
+        <div class="video-container">
+            <video id="videoPlayer2" width="640" height="360" controls>
+                <source id="videoSource2" src="" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-
+    
         <script>
-            function displayVideo2() {
-                var selectElement = document.getElementById("video-select2");
-                var selectedVideo = selectElement.options[selectElement.selectedIndex].value;
-                var videoElement = document.getElementById("selected-video2");
-                videoElement.src = selectedVideo;
+            const taskSelect2 = document.getElementById('taskSelect2');
+            const trajectorySelect2 = document.getElementById('trajectorySelect2');
+            const videoSource2 = document.getElementById('videoSource2');
+            const videoPlayer2 = document.getElementById('videoPlayer2');
+    
+            function updateVideo2() {
+                const task = taskSelect2.value;
+                const trajectory = trajectorySelect2.value;
+                const videoUrl = `./mfiles/videos/${task}_option1_${trajectory}.mp4`;
+                videoSource2.src = videoUrl;
+                videoPlayer2.load();
             }
-
-            // Display the first video when the page loads
-            displayVideo2();
+    
+            taskSelect2.addEventListener('change', updateVideo2);
+            trajectorySelect2.addEventListener('change', updateVideo2);
+    
+            // Initial video load
+            updateVideo2();
         </script>
-        <br><br> -->
+
+        <br><br>
+
+        
 
     </section>
 
