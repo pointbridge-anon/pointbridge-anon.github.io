@@ -653,7 +653,63 @@ pre {
 
         <br><br>
 
+
+        <hr>
+        <h2>Point Bridge on held-out objects</h2>
+        <br><br>
+
+        We evaluate single-task sim-real co-trained Point Bridge policies on a set of held-out objects.
+        Overall, Point Bridge achieves an 97% success rate across these tasks, highlighting its effectiveness in generalizing to unseen objects.
+        We provide videos of successful rollouts below (all played at 2X speed).
+        <br><br>
         
+        Task: <select id="taskSelect3">
+            <option value="stack_bowls_heldout">stack bowls</option>
+            <option value="bowl_on_plate_heldout">put bowl on plate</option>
+            <option value="mug_on_plate_heldout">put mug on plate</option>
+        </select>    
+        Object: <select id="objectSelect3">
+            <option value="option1">option 1</option>
+            <option value="option2">option 2</option>
+        </select>    
+        Trajectory: <select id="trajectorySelect3">
+            <option value="traj1">trajectory 1</option>
+            <option value="traj2">trajectory 2</option>
+        </select>
+    
+        <div class="video-container">
+            <video id="videoPlayer3" width="640" height="360" controls>
+                <source id="videoSource3" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    
+        <script>
+            const taskSelect3 = document.getElementById('taskSelect3');
+            const objectSelect3 = document.getElementById('objectSelect3');
+            const trajectorySelect3 = document.getElementById('trajectorySelect3');
+            const videoSource3 = document.getElementById('videoSource3');
+            const videoPlayer3 = document.getElementById('videoPlayer3');
+    
+            function updateVideo3() {
+                const task = taskSelect3.value;
+                const object = objectSelect3.value;
+                const trajectory = trajectorySelect3.value;
+                const videoUrl = `./mfiles/videos/${task}_${object}_${trajectory}.mp4`;
+                videoSource3.src = videoUrl;
+                videoPlayer3.load();
+            }
+    
+            taskSelect3.addEventListener('change', updateVideo3);
+            objectSelect3.addEventListener('change', updateVideo3);
+            trajectorySelect3.addEventListener('change', updateVideo3);
+    
+            // Initial video load
+            updateVideo3();
+        </script>
+
+        <br><br>
+
 
     </section>
 
