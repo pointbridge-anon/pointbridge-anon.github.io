@@ -492,19 +492,19 @@ pre {
                 generation are a promising alternative to address the need for data, but the utility
                 of synthetic data for training visuomotor policies still remains limited due to the
                 visual domain gap between the two domains. In this work, we introduce POINT
-                BRIDGE, a framework that uses unified domain-agnostic point-based representa-
-                tions to unlock the potential of synthetic simulation datasets and enable zero-shot
+                BRIDGE, a framework that uses unified domain-agnostic point-based representations
+                to unlock the potential of synthetic simulation datasets and enable zero-shot
                 sim-to-real policy transfer without explicit visual or object-level alignment across
-                domains. Point Bridge combines automated point-based representation extrac-
-                tion via Vision-Language Models (VLMs), transformer-based policy learning, and
+                domains. Point Bridge combines automated point-based representation extraction via
+                Vision-Language Models (VLMs), transformer-based policy learning, and
                 inference-time pipelines that balance accuracy and computational efficiency to
                 establish a system that can train capable real-world manipulation agents with purely
                 synthetic data. Point Bridge can further benefit from co-training on small sets of
-                real-world demonstrations, training high-quality manipulation agents that substan-
-                tially outperform prior vision-based sim-and-real co-training approaches. POINT
+                real-world demonstrations, training high-quality manipulation agents that substantially 
+                outperform prior vision-based sim-and-real co-training approaches. POINT
                 BRIDGE yields improvements of up to 44% on zero-shot sim-to-real transfer and up
-                to 66% when co-trained with a small amount of real data. Point Bridge also fa-
-                cilitates multi-task learning.
+                to 66% when co-trained with a small amount of real data. Point Bridge also 
+                facilitates multi-task learning.
             </p>
         </div>
     </section>
@@ -706,6 +706,55 @@ pre {
     
             // Initial video load
             updateVideo3();
+        </script>
+
+        <br><br>
+
+        <hr>
+        <h2>Point Bridge in the presence of background distractors</h2>
+        <br><br>
+
+        To evaluate the robustness of our scene filtering pipeline, we evaluate the zero-shot single-task sim-to-real transfer performance 
+        of Point Bridge with background distractors. Overall, Point Bridge, which incorporates scene filtering, maintains performance on par 
+        with the distractor-free scenario and exhibits strong robustness to background clutter. We provide videos of successful rollouts below (all played at 2X speed).
+        <br><br>
+        
+        Task: <select id="taskSelect4">
+            <option value="stack_bowls_distractors">stack bowls</option>
+            <option value="bowl_on_plate_distractors">put bowl on plate</option>
+            <option value="mug_on_plate_distractors">put mug on plate</option>
+        </select>    
+        Trajectory: <select id="trajectorySelect4">
+            <option value="traj1">trajectory 1</option>
+            <option value="traj2">trajectory 2</option>
+        </select>
+    
+        <div class="video-container">
+            <video id="videoPlayer4" width="640" height="360" controls>
+                <source id="videoSource4" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    
+        <script>
+            const taskSelect4 = document.getElementById('taskSelect4');
+            const trajectorySelect4 = document.getElementById('trajectorySelect4');
+            const videoSource4 = document.getElementById('videoSource4');
+            const videoPlayer4 = document.getElementById('videoPlayer4');
+    
+            function updateVideo4() {
+                const task = taskSelect4.value;
+                const trajectory = trajectorySelect4.value;
+                const videoUrl = `./mfiles/videos/${task}_${trajectory}.mp4`;
+                videoSource4.src = videoUrl;
+                videoPlayer4.load();
+            }
+    
+            taskSelect4.addEventListener('change', updateVideo4);
+            trajectorySelect4.addEventListener('change', updateVideo4);
+    
+            // Initial video load
+            updateVideo4();
         </script>
 
         <br><br>
